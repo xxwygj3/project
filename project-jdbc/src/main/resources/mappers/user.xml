@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sbtest.projectjdbc.dao.UserDao">
+    <sql id="cols">
+        u.USR_ID AS usrId,
+        u.USR_NAME AS usrName,
+        u.USR_PWD AS
+        usrPwd,
+        u.CUS_CODE AS cusCode,
+        TO_CHAR(u.LAST_LOGIN_TIME,'yyyy-MM-DD
+        HH24:MI:SS') AS
+        lastLoginTime,
+        u.LAST_LOGIN_IP AS
+        lastLoginIp,
+        u.IS_LOCKED AS isLocked,
+        u.FAILED_COUNT AS failedCount,
+        u.CHANGE_PWD AS
+        changePwd,
+        u.STATUS AS status
+    </sql>
+
+    <!-- 客户登录查询 ,查询用户名密码匹配正确并且状态为有效的用户 -->
+    <select id="loginByNameAndPwd" resultType="User" parameterType="UserQuery">
+        SELECT
+        <include refid="cols" />
+        FROM
+        TPBAP_CUS_USER u
+        INNER JOIN
+        TPBAP_CUS_CUSTOMER c
+        ON u.CUS_CODE =
+        c.CUS_CODE
+        WHERE c.CUS_BIZ !=2
+        AND u.STATUS = 1
+        AND u.USR_NAME =#{usrName}
+        AND u.USR_PWD = #{usrPwd}
+    </select>
+</mapper>
