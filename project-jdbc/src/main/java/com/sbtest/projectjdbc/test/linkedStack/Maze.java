@@ -29,6 +29,9 @@ public class Maze {
 
     public void tryPosition(int row, int col){
         grid[row][col] = TRIED;
+        System.out.println("===========================================");
+        System.out.println(toString());
+        System.out.println("===========================================");
     }
 
     public int getRows(){
