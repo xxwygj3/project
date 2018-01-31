@@ -1,4 +1,4 @@
-package com.sbtest.projectjdbc.test;
+package com.sbtest.projectjdbc.test.myStack;
 
 public class Step {
     int x,y,d;
