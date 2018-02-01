@@ -115,25 +115,46 @@ public class ProgramOfStudy implements Iterable<Course>, Serializable{
         return pos;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         ProgramOfStudy pos = new ProgramOfStudy();
         pos.addCourse(new Course("CS",101,"Introduction to Programming","A-"));
         pos.addCourse(new Course("ARCH",305,"Building Analysis","A"));
         pos.addCourse(new Course("GRE",210,"Intermediate German"));
         pos.addCourse(new Course("CS",320,"Computer Architecture"));
         pos.addCourse(new Course("THE",201,"The Theatre Experience"));
-
         Course arch = pos.find("CS",320);
         pos.addCourseAfter(arch,new Course("CS",321,"Operating Systems"));
-
         Course theatre = pos.find("THE",201);
         theatre.setGrade("A-");
-
         Course german = pos.find("GRE",210);
         pos.replace(german,new Course("FRE",110,"Beginning French","B+"));
-
         System.out.println(pos);
-
+        pos.save("ProgramOfStudy");
+        //显示课程
+        pos = ProgramOfStudy.load("ProgramOfStudy");
+        System.out.println(pos);
+        System.out.println("Classes with Grades of A of A-\n");
+        //for-each循环
+        for(Course course:pos){
+            if(course.getGrade().equals("A") || course.getGrade().equals("A-")){
+                System.out.println(course);
+            }
+        }
+        //删除课程
+        pos = ProgramOfStudy.load("ProgramOfStudy");
+        System.out.println(pos);
+        System.out.println("Removing courses with no Grades.\n");
+        Iterator<Course> itr = pos.iterator();
+        //使用一个显式的迭代器，因为要使用remover操作。
+        //要删除一个Course对象，可以调用iterator的remover方法。
+        //如果在for-each循环中这样做，会触发ConcurrentModificationException异常。
+        while(itr.hasNext()){
+            Course course = itr.next();
+            if(!course.taken()){
+                itr.remove();
+            }
+        }
+        System.out.println(pos);
         pos.save("ProgramOfStudy");
     }
 }
