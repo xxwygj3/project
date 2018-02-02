@@ -4,12 +4,15 @@ import java.io.FileNotFoundException;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Stack;
 
 /**
  * 迷宫解决
  */
 public class MazeSolver {
     private Maze maze;
+    private static Stack<Position> stack = new Stack<Position>();
+
 
     public MazeSolver(Maze maze) {
         this.maze = maze;
@@ -67,6 +70,7 @@ public class MazeSolver {
             }
             if(done){
                 maze.markPath(row,column);
+                stack.push(new Position(row,column));
             }
         }
         return done;
@@ -89,19 +93,24 @@ public class MazeSolver {
         Maze labyrinth = new Maze(filename);
         System.out.println(labyrinth);
         MazeSolver solver = new MazeSolver(labyrinth);
-        //回溯法
-        if(solver.traverse()){
-            System.out.println("The maze was successfully traversed!");
-        }else {
-            System.out.println("There is no possible path.");
-        }
+//        //回溯法
+//        if(solver.traverse()){
+//            System.out.println("The maze was successfully traversed!");
+//        }else {
+//            System.out.println("There is no possible path.");
+//        }
         System.out.println(labyrinth);
         //递归法
         if (solver.traverse(0, 0)) {
             System.out.println("The maze was successfully traversed!");
+            while (!stack.isEmpty()){
+                Position pos = stack.pop();
+                System.out.print("("+pos.getX()+","+pos.getY()+")==>");
+            }
         } else {
             System.out.println("There is no possible path.");
         }
         System.out.println(labyrinth);
     }
+
 }
