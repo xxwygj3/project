@@ -1,9 +1,13 @@
 package com.sbtest.projectjdbc.test.tree;
 
+/**
+ * 二叉树的结点类
+ * @param <T>
+ */
 public class BinaryTreeNode<T> extends LinkedBinaryTree<T> {
-    private T element;
-    private BinaryTreeNode<T> left;
-    private BinaryTreeNode<T> right;
+    protected T element;
+    protected BinaryTreeNode<T> left;
+    protected BinaryTreeNode<T> right;
 
     public BinaryTreeNode(T element) {
         this.element = element;

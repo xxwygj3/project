@@ -16,7 +16,7 @@ import java.util.function.Consumer;
  */
 public class LinkedBinaryTree<T> implements BinaryTreeADT<T> {
     protected BinaryTreeNode<T> root;//二叉树根节点
-    protected int modCount;
+    protected int modCount;//二叉树的元素数目
 
     /**
      * 创建空的链接二叉树
