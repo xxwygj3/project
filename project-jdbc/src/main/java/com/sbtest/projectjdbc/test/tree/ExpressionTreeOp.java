@@ -1,6 +1,7 @@
 package com.sbtest.projectjdbc.test.tree;
 
 /**
+ * 表达式树的操作类
  * 跟踪记录该元素是一个数字还是一个操作符，以及该处存储的是哪个操作符或是什么值。
  */
 public class ExpressionTreeOp{
@@ -14,14 +15,26 @@ public class ExpressionTreeOp{
         this.value = value;
     }
 
+    /**
+     * 判断是否是运算符
+     * @return
+     */
     public boolean isOperator() {
         return (termType == 1);
     }
 
+    /**
+     * 返回运算符
+     * @return
+     */
     public char getOperator() {
         return operator;
     }
 
+    /**
+     * 返回值
+     * @return
+     */
     public int getValue() {
         return value;
     }

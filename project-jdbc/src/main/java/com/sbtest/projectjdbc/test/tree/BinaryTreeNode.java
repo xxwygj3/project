@@ -1,18 +1,44 @@
 package com.sbtest.projectjdbc.test.tree;
 
-public class BinaryTreeNode<T> extends LinkedBinaryTree<T>{
+public class BinaryTreeNode<T> extends LinkedBinaryTree<T> {
     private T element;
-    private BinaryTreeNode<T>  left;
-    private BinaryTreeNode<T>  right;
+    private BinaryTreeNode<T> left;
+    private BinaryTreeNode<T> right;
 
-    public BinaryTreeNode(T element, T leftSubtree, T rightSubtree) {
-        this.element=element;
-        this.left= (BinaryTreeNode<T>) leftSubtree;
-        this.right= (BinaryTreeNode<T>) rightSubtree;
+    public BinaryTreeNode(T element) {
+        this.element = element;
+        this.left = null;
+        this.right = null;
     }
 
-    public int numChildren(){
-        return 0;
+    public BinaryTreeNode(T element, LinkedBinaryTree<T> left, LinkedBinaryTree<T> right) {
+        this.element = element;
+        if (left == null) {
+            this.left = null;
+        } else {
+            this.left = left.getRootNode();
+        }
+        if (right == null) {
+            this.right = null;
+        } else {
+            this.right = right.getRootNode();
+        }
+    }
+
+    /**
+     * 节点总数
+     *
+     * @return
+     */
+    public int numChildren() {
+        int children = 0;
+        if (left != null) {
+            children = 1 + left.numChildren();
+        }
+        if (right != null) {
+            children = children + 1 + right.numChildren();
+        }
+        return children;
     }
 
     public T getElement() {
@@ -25,10 +51,6 @@ public class BinaryTreeNode<T> extends LinkedBinaryTree<T>{
 
     public void setRight(BinaryTreeNode<T> right) {
         this.right = right;
-    }
-
-    public void node(){
-
     }
 
     public BinaryTreeNode<T> getLeft() {

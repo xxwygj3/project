@@ -60,7 +60,14 @@ public abstract class ArrayList<T> implements ListADT<T>, Iterable<T> {
 
     @Override
     public T removeFirst() {
-        return null;
+        T result = list[0];
+        // 移动
+        for (int i = 0; i < rear; i++) {
+            list[i] = list[i++];// 元素向前移动
+        }
+        list[rear] = null;// 最后一个置空
+        modCount++;
+        return result;
     }
 
     @Override

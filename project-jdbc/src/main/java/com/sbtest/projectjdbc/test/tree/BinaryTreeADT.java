@@ -4,15 +4,14 @@ import java.util.Iterator;
 
 /**
  * 二叉树抽象接口
- * http://blog.csdn.net/sihai12345/article/details/68926934?locationNum=1&fps=1
  * @param <T>
  */
 public interface BinaryTreeADT<T> {
     //返回指向二叉树的根的引用
     public T getRootElement();
-
+    //判断二叉树是否为空
     public boolean isEmpty();
-
+    //返回二叉树中元素的数量
     public int size();
     //判定指定目标是否在该树中
     public boolean contains(T targetElement);
@@ -23,7 +22,7 @@ public interface BinaryTreeADT<T> {
     //返回一个迭代器遍历树
     public Iterator<T> iterator();
     //为树的中序遍历返回一个迭代器
-    public Iterator<T> iteratorIOrder();
+    public Iterator<T> iteratorInOrder();
     //为树的前序遍历返回一个迭代器
     public Iterator<T> iteratorPreOrder();
     //为树的后序遍历返回一个迭代器
